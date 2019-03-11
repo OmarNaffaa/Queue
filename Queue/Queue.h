@@ -1,7 +1,7 @@
 #pragma once
 #include <iostream>
 
-typedef char QueueElement; // change type here
+typedef int QueueElement; // change type here
 
 class Queue
 {

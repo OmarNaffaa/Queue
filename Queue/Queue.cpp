@@ -16,7 +16,6 @@ Queue::Queue()
 	else
 	{
 		cerr << "Inadequate memory to allocate the queue, terminating execution..." << endl;
-		exit(1);
 	}
 }
 
@@ -25,7 +24,6 @@ Queue::Queue(int SIZE)
 	if (SIZE <= 0)
 	{
 		cerr << "Invalid size for queue, terminating execution..." << endl;
-		exit(1);
 	}
 
 	qSize = SIZE;
@@ -40,7 +38,6 @@ Queue::Queue(int SIZE)
 	else
 	{
 		cerr << "Inadequate memory to allocate the queue, terminating execution..." << endl;
-		exit(1);
 	}
 }
 
@@ -66,8 +63,7 @@ void Queue::Enqueue(const QueueElement& item)
 	}
 	else
 	{
-		cerr << "Queue full - Cannot add another item..." << endl;
-		exit(1);
+		cerr << "Queue is full - cannot enqueue another item..." << endl;
 	}
 }
 
@@ -81,7 +77,6 @@ void Queue::Dequeue()
 	else
 	{
 		cerr << "Queue is empty - Cannot dequeue an item..." << endl;
-		exit(1);
 	}
 }
 
@@ -99,9 +94,15 @@ QueueElement Queue::Front() const
 
 void Queue::Display()
 {
-	for (int pos = mFront; pos != mBack; pos = (pos + 1) % qSize)
+	int currentFront = mFront;
+
+	if (qAmntFilled == 0)
+		cout << "Queue is empty..." << endl;
+
+	for (int i = 0; i < qAmntFilled; i++)
 	{
-		cout << mArray[pos] << " ";
+		cout << mArray[currentFront] << " ";
+		currentFront = (currentFront + 1) % qSize;
 	}
 
 	cout << endl;
